@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import mongoose, { Schema, Document } from "mongoose";
+import serverless from 'serverless-http';
 
 const app = express();
 
@@ -112,7 +113,4 @@ app.put("/recipes/:id", async (req: any, res: any) => {
     res.status(500).json({ message: "Error updating recipe", error });
   }
 });
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export const handler = serverless(app);
